@@ -17,17 +17,18 @@ final class Order extends HttpApi
      *
      * @return Model|ResponseInterface
      */
-    public function get(int $id)
+    public function get(string $id)
     {
         if (empty($id)) {
             throw new InvalidArgumentException('Id cannot be empty');
         }
 
-        $response = $this->httpPost('order/search', ['ExternalOrderNumber' => $id]);
+        $response = $this->httpGet('/v2/order/search?externalOrderNumber='.$id);
         if (!$this->hydrator) {
             return $response;
         }
 
+        var_dump($response->getBody()->__toString());
         // Use any valid status code here
         if (200 !== $response->getStatusCode()) {
             $this->handleErrors($response);
