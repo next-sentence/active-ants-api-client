@@ -9,7 +9,6 @@ final class Custom extends HttpApi
     public function get(string $path, array $params = [], array $requestHeaders = [], string $class = '')
     {
         $response = parent::httpGet($path, $params, $requestHeaders);
-        var_dump($response->getStatusCode());
         if (!$this->hydrator) {
             return $response;
         }

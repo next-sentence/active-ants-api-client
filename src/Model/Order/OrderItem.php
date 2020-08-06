@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace LWC\ActiveAnts\Model\Order;
+Namespace LWC\ActiveAnts\Model\Order;
 
 use LWC\ActiveAnts\Model\CreatableFromArray;
 
@@ -11,64 +11,48 @@ final class OrderItem implements CreatableFromArray
     /**
      * @var string
      */
-    private $sku;
+    private $Sku;
 
     /**
      * @var int
      */
-    private $quantity;
+    private $Quantity;
 
     /**
      * @var string
      */
-    private $name;
+    private $Name;
 
     /**
      * @var float
      */
-    private $price;
+    private $Price;
 
     /**
      * @var float
      */
-    private $VAT;
-
-    /**
-     * @var string|null
-     */
-    private $extra6;
-
-    /**
-     * @var string|null
-     */
-    private $extra7;
+    private $Vat;
 
     /**
      * OrderItem constructor.
-     * @param string $sku
-     * @param string $name
-     * @param int $quantity
-     * @param float $price
-     * @param float $VAT
-     * @param string|null $extra6
-     * @param string|null $extra7
+     * @param string $Sku
+     * @param string $Name
+     * @param int $Quantity
+     * @param float $Price
+     * @param float $Vat
      */
     private function __construct(
-        string $sku,
-        string $name,
-        int $quantity,
-        float $price,
-        float $VAT,
-        ?string $extra6 = null,
-        ?string $extra7 = null
+        string $Sku,
+        string $Name,
+        int $Quantity,
+        float $Price,
+        float $Vat
     ) {
-        $this->sku = $sku;
-        $this->quantity = $quantity;
-        $this->name = $name;
-        $this->price = $price;
-        $this->VAT = $VAT;
-        $this->extra6 = $extra6;
-        $this->extra7 = $extra7;
+        $this->Sku = $Sku;
+        $this->Quantity = $Quantity;
+        $this->Name = $Name;
+        $this->Price = $Price;
+        $this->Vat = $Vat;
     }
 
     /**
@@ -76,32 +60,32 @@ final class OrderItem implements CreatableFromArray
      */
     public static function createFromArray(array $data): self
     {
-        $sku = '';
-        if (isset($data['sku'])) {
-            $sku = $data['sku'];
+        $Sku = '';
+        if (isset($data['Sku'])) {
+            $Sku = $data['Sku'];
         }
 
-        $quantity = -1;
-        if (isset($data['quantity'])) {
-            $quantity = $data['quantity'];
+        $Quantity = -1;
+        if (isset($data['Quantity'])) {
+            $Quantity = $data['Quantity'];
         }
 
-        $name = '';
-        if (isset($data['name'])) {
-            $name = $data['name'];
+        $Name = '';
+        if (isset($data['Name'])) {
+            $Name = $data['Name'];
         }
 
-        $price = -1;
-        if (isset($data['price'])) {
-            $price = $data['price'];
+        $Price = -1;
+        if (isset($data['Price'])) {
+            $Price = $data['Price'];
         }
 
-        $VAT = -1;
-        if (isset($data['VAT'])) {
-            $VAT = $data['VAt'];
+        $Vat = -1;
+        if (isset($data['Vat'])) {
+            $Vat = $data['Vat'];
         }
 
-        return new self($sku, $name, $quantity, $price, $VAT);
+        return new self($Sku, $Name, $Quantity, $Price, $Vat);
     }
 
     /**
@@ -109,7 +93,7 @@ final class OrderItem implements CreatableFromArray
      */
     public function getSku(): string
     {
-        return $this->sku;
+        return $this->Sku;
     }
 
     /**
@@ -117,7 +101,7 @@ final class OrderItem implements CreatableFromArray
      */
     public function getQuantity(): int
     {
-        return $this->quantity;
+        return $this->Quantity;
     }
 
     /**
@@ -125,7 +109,7 @@ final class OrderItem implements CreatableFromArray
      */
     public function getName(): string
     {
-        return $this->name;
+        return $this->Name;
     }
 
     /**
@@ -133,30 +117,14 @@ final class OrderItem implements CreatableFromArray
      */
     public function getPrice(): float
     {
-        return $this->price;
+        return $this->Price;
     }
 
     /**
      * @return float
      */
-    public function getVAT(): float
+    public function getVat(): float
     {
-        return $this->VAT;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getExtra6(): ?string
-    {
-        return $this->extra6;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getExtra7(): ?string
-    {
-        return $this->extra7;
+        return $this->Vat;
     }
 }

@@ -109,6 +109,11 @@ class ActiveAntsClient
         return new Api\Order($this->getHttpClient(), $this->hydrator, $this->requestBuilder);
     }
 
+    public function product(): Api\Product
+    {
+        return new Api\Product($this->getHttpClient(), $this->hydrator, $this->requestBuilder);
+    }
+
     private function getHttpClient(): HttpClient
     {
         return $this->clientConfigurator->createConfiguredClient();
