@@ -26,9 +26,9 @@ final class ModelHydrator implements Hydrator
         }
 
         if (\is_subclass_of($class, CreatableFromArray::class)) {
-            $object = \call_user_func($class.'::createFromArray', $data);
+            $object = \call_user_func($class.'::createFromArray', $data['result']);
         } else {
-            $object = new $class($data);
+            $object = new $class($data['result']);
         }
 
         return $object;
