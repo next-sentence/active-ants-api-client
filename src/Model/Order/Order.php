@@ -136,6 +136,11 @@ final class Order implements CreatableFromArray
     private $OrderItems;
 
     /**
+    * @var array
+    */
+    private $data;
+
+    /**
      * Order constructor.
      * @param string $ExternalOrderNumber
      * @param string $PreferredShippingDate
@@ -161,7 +166,8 @@ final class Order implements CreatableFromArray
      * @param string $DeliveryAddressHouseNumberAddition
      * @param string $DeliveryAddressCityName
      * @param string $DeliveryAddressCountryIso
-     * @param array $OrderItems
+     * @param array $OrderItems,
+     * @param array $data
      */
     private function __construct(
         string $ExternalOrderNumber,
@@ -188,7 +194,8 @@ final class Order implements CreatableFromArray
         string $DeliveryAddressHouseNumber,
         string $DeliveryAddressHouseNumberAddition,
         string $DeliveryAddressCountryIso,
-        array $OrderItems
+        array $OrderItems,
+        array $data
     ) {
         $this->ExternalOrderNumber = $ExternalOrderNumber;
         $this->PreferredShippingDate = $PreferredShippingDate;
@@ -215,6 +222,7 @@ final class Order implements CreatableFromArray
         $this->DeliveryAddressCityName = $DeliveryAddressCityName;
         $this->DeliveryAddressCountryIso = $DeliveryAddressCountryIso;
         $this->OrderItems = $OrderItems;
+        $this->data = $data;
     }
 
     /**
@@ -375,7 +383,8 @@ final class Order implements CreatableFromArray
             $DeliveryAddressHouseNumberAddition,
             $DeliveryAddressCityName,
             $DeliveryAddressCountryIso,
-            $OrderItems
+            $OrderItems,
+            $data
         );
     }
 
@@ -505,5 +514,14 @@ final class Order implements CreatableFromArray
     public function getItems(): array
     {
         return $this->OrderItems;
+    }
+
+    public function isSuccesfulCreated()
+    {
+        if (isset($this->data['messageCode']) && $this->data['messageCode'] == 'OK') {
+            return true;
+        }
+
+        return false;
     }
 }
