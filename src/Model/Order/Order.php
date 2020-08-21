@@ -524,4 +524,22 @@ final class Order implements CreatableFromArray
 
         return false;
     }
+
+    public function getReturnMessage()
+    {
+        if (isset($this->data['message'])) {
+            return $this->data['message'];
+        }
+
+        return '';
+    }
+
+    public function getReturnData()
+    {
+        if (isset($this->data)) {
+            return $this->data;
+        }
+
+        return '';
+    }
 }

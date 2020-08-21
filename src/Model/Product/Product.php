@@ -19,16 +19,25 @@ final class Product implements CreatableFromArray
     private $Name;
 
     /**
+     * @var array
+     */
+    private $data;
+
+    /**
      * Product constructor.
      * @param string $Sku
      * @param string $Name
+     * @param array $data
+     *
      */
     private function __construct(
         string $Sku,
-        string $Name
+        string $Name,
+        array $data
     ) {
         $this->Sku = $Sku;
         $this->Name = $Name;
+        $this->data = $data;
     }
 
     /**
@@ -48,7 +57,8 @@ final class Product implements CreatableFromArray
 
         return new self(
             $Sku,
-            $Name
+            $Name,
+            $data
         );
     }
 
@@ -68,6 +78,21 @@ final class Product implements CreatableFromArray
         return $this->Name;
     }
 
+    public function isSuccesfulInserted()
+    {
+        if (isset($this->data['messageCode']) && $this->data['messageCode'] == 'OK') {
+            return true;
+        }
 
+        return false;
+    }
 
+    public function getReturnMessage()
+    {
+        if (isset($this->data['message'])) {
+            return $this->data['message'];
+        }
+
+        return '';
+    }
 }

@@ -32,7 +32,7 @@ final class Product extends HttpApi
         }
 
         // Use any valid status code here
-        if (201 !== $response->getStatusCode()) {
+        if (200 !== $response->getStatusCode()) {
             $this->handleErrors($response);
         }
 
