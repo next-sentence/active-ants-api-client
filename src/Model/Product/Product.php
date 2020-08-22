@@ -78,7 +78,7 @@ final class Product implements CreatableFromArray
         return $this->Name;
     }
 
-    public function isSuccesfulInserted()
+    public function getReturnCode()
     {
         if (isset($this->data['messageCode']) && $this->data['messageCode'] == 'OK') {
             return true;

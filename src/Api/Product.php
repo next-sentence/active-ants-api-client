@@ -12,9 +12,10 @@ use Psr\Http\Message\ResponseInterface;
 final class Product extends HttpApi
 {
     /**
-     * @throws Exception
-     *
      * @return Model|ResponseInterface
+     * @throws \Psr\Http\Client\ClientExceptionInterface
+     *
+     * @throws Exception
      */
     public function create(array $product = [])
     {
@@ -26,9 +27,22 @@ final class Product extends HttpApi
             throw new InvalidArgumentException('Name field cannot be empty');
         }
 
-        $response = $this->httpPost('/product/add', $product);
-        if (!$this->hydrator) {
-            return $response;
+        $response = $this->httpGet('/v2/product/search?sku='.$product['Sku']);
+
+        $search = $this->hydrator->hydrate($response, Model::class);
+
+        if($search->getReturnCode()) {
+
+            $response = $this->httpPost('/product/edit', $product);
+            if (!$this->hydrator) {
+                return $response;
+            }
+        } else {
+
+            $response = $this->httpPost('/product/add', $product);
+            if (!$this->hydrator) {
+                return $response;
+            }
         }
 
         // Use any valid status code here
