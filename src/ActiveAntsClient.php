@@ -114,6 +114,11 @@ class ActiveAntsClient
         return new Api\Product($this->getHttpClient(), $this->hydrator, $this->requestBuilder);
     }
 
+    public function stock(): Api\Stock
+    {
+        return new Api\Stock($this->getHttpClient(), $this->hydrator, $this->requestBuilder);
+    }
+
     private function getHttpClient(): HttpClient
     {
         return $this->clientConfigurator->createConfiguredClient();
