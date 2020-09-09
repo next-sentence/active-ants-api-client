@@ -32,24 +32,20 @@ final class Product extends HttpApi
         $search = $this->hydrator->hydrate($response, Model::class);
 
         if($search->getReturnCode()) {
-
             $response = $this->httpPost('/product/edit', $product);
-            if (!$this->hydrator) {
-                return $response;
-            }
         } else {
-
             $response = $this->httpPost('/product/add', $product);
-            if (!$this->hydrator) {
-                return $response;
-            }
         }
 
         // Use any valid status code here
-        if (200 !== $response->getStatusCode()) {
+        if (!in_array($response->getStatusCode(), [200, 201], true) ) {
             $this->handleErrors($response);
         }
 
-        return $this->hydrator->hydrate($response, Model::class);
+        if ($this->hydrator) {
+            return $this->hydrator->hydrate($response, Model::class);
+        }
+
+        return $response;
     }
 }
